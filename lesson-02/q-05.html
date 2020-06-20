@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script>
+    
+        function addition(a, b) { // сложение
+            return a + b;
+        }
+        
+        function subtraction(a, b) { // вычитание
+            return a - b;
+        }
+        
+        function multiplication(a, b) { // умножение
+            return a * b;
+        }
+        
+        function division(a, b) { // деление
+            if (b == 0) {
+                console.log("division by zero"); // при втором аргументе == 0 выводим сообдение, однако непонятно что при этом возвращать, если возвращать строку, то при использовании текущей функции в функции суммы будет конкатенация
+                
+//                return NaN;
+            }
+            return a / b;
+        }
+                
+        let a = addition(multiplication(2, 5), division(2, 0));
+        console.log(a);
+        
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script>
+        let a = parseInt(prompt("введите целое число а:", 0)), 
+            b = parseInt(prompt("введите целое число b:", 0)); //произвольные значения для a, b
+        
+        if ((a >= 0) && (b >= 0)){ //если оба значения больше или равны 0
+            console.log("++");
+            alert(Math.abs(a - b));            
+        }
+        else if ((a < 0) && (b < 0)){ // если оба значения меньне 0
+            console.log("--");
+            alert(a * b);            
+        }
+        else if (((a >= 0) && (b < 0)) || ((a < 0) && (b >= 0))){ // если первое больше или равно 0 и второе меньше 0, либо первое меньше 0 и второе больше или равно 0
+            console.log("+-");
+            alert(a + b);            
+        }
+    </script>
+    
+</body>
+</html>

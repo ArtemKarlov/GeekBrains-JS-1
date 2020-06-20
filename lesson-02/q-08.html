@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script>
+        function power(val, pow) {
+            if (pow == 0) {
+                return 1; // x^0 == 1
+            }
+            return val * power(val, (pow - 1)); // возведение в степень можно записать рекуррентным соотношением x^n == x * x^(n-1)
+        }
+        console.log(power(2, 10));
+    </script>
+    
+</body>
+</html>

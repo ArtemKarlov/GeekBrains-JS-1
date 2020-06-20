@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+   
+    <script>
+    
+        function addition(a, b) {
+            return a + b;
+        }
+        
+        function subtraction(a, b) {
+            return a - b;
+        }
+        
+        function multiplication(a, b) {
+            return a * b;
+        }
+        
+        function division(a, b) {
+            if (b == 0) {
+                console.log("division by zero");
+                return NaN;
+            }
+            return a / b;
+        }
+        
+        function mathOperation(arg1, arg2, operation) {
+            switch(operation) {
+                case 'addition':
+                    return addition(arg1, arg2);
+                    break;
+                case 'subtraction':
+                    return subtraction(arg1, arg2);
+                    break;
+                case 'multiplication':
+                    return multiplication(arg1, arg2);
+                    break;
+                case 'division':
+                    return division(arg1, arg2);
+                    break;
+                default:
+                    return 'wrong math Operation';
+                    break;
+            }
+        }
+                
+        console.log(mathOperation(10, 0, 'division'));
+        
+    </script>
+    
+</body>
+</html>
