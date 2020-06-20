@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        
+        let currentNumber = 0;
+        
+        do {
+            if (currentNumber == 0) {
+                document.write(currentNumber + " - это ноль <br>");
+            } else if (currentNumber % 2 != 0) {
+                document.write(currentNumber + " - нечетное число <br>");
+            } else if (currentNumber % 2 == 0) {
+                document.write(currentNumber + " - четное число <br>");
+            }
+            
+            currentNumber++;
+            
+        } while (currentNumber <= 10);
+        
+    </script>
+    
+</body>
+</html>
