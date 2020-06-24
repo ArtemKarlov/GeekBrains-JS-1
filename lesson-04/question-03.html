@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quest</title>
+<!--     <script src="text.js" defer></script>
+    <script src="gameCode2.js" defer></script> -->
+</head>
+<body>
+
+	<script>
+		
+		let	questions = [ // задаем массив из объектов с вопросами и ответами
+	       q1 = {
+	            question: 'текст вопроса 1',
+	            answer1: "ответ 1 вопроса 1",
+	            answer2: "ответ 2 вопроса 1",
+	            answer3: "ответ 3 вопроса 1",
+	            answer4: "ответ 4 вопроса 1",
+	            correct: 1,
+	        },
+	        q2 =  {
+	            question: 'текст вопроса 2',
+	            answer1: "ответ 1 вопроса 2",
+	            answer2: "ответ 2 вопроса 2",
+	            answer3: "ответ 3 вопроса 2",
+	            answer4: "ответ 4 вопроса 2",
+	            correct: 2,
+	        },
+	        q3 =  {
+	            question: 'текст вопроса 3',
+	            answer1: "ответ 1 вопроса 3",
+	            answer2: "ответ 2 вопроса 3",
+	            answer3: "ответ 3 вопроса 3",
+	            answer4: "ответ 4 вопроса 3",
+	            correct: 3,
+	        },
+	        q4 =  {
+	            question: 'текст вопроса 4',
+	            answer1: "ответ 1 вопроса 4",
+	            answer2: "ответ 2 вопроса 4",
+	            answer3: "ответ 3 вопроса 4",
+	            answer4: "ответ 4 вопроса 4",
+	            correct: 4,
+	        },
+	        q5 =  {
+	            question: 'текст вопроса 5',
+	            answer1: "ответ 1 вопроса 5",
+	            answer2: "ответ 2 вопроса 5",
+	            answer3: "ответ 3 вопроса 5",
+	            answer4: "ответ 4 вопроса 5",
+	            correct: 1,
+	        },
+
+	    ];
+
+	    let mony = 0,
+	    	prize = 0;
+
+
+	    for (let i = 0; i < questions.length; i++) { // в цикле перебор по всем объектам в массиве
+	    	askQuestion(i); // задаем вопрос и проверяем на валидность ответ
+	    	if (userAnswer == -1) { // если игрок прекращает игру, он забирает заработанную сумму и игра заканчивается
+	    		prize = mony;
+	    		alert('Вы забираете ' + prize + ' руб.')
+	    		break;
+	    	}
+	    	else if (userAnswer == questions[i]['correct']) {
+	    		mony += 1000 * (i + 1)*(i + 1);
+	    		if (i == 0 || i == 2 || i == (questions.length - 1)) { // определяем несгораемые суммы
+	    			prize = mony;
+	    		}
+	    		alert('Это правильный ответ и Вы зарабатываете ' + mony + ' руб.\nнесгораемая сумма: ' + prize + ' руб.');
+	    	} 
+	    	else { // в случае неправильного ответа игрок забирает несгораемую сумму и игра заканчивается
+	    		alert('Это неправильный ответ и Вы зарабатываете ' + prize + ' руб.');
+	    		break;
+
+	    	}
+	    }
+
+	    alert('Спасибо за игру!\nВы забрали ' + prize + ' руб.');
+
+
+		function askQuestion(questionNumber) {
+		    let isOkAnswer;
+		    do {
+		        isOkAnswer = false;
+		        userAnswer = +prompt(questions[questionNumber]['question'] + '\n' + questions[questionNumber]['answer1'] + '\n' + questions[questionNumber]['answer2'] + '\n' + questions[questionNumber]['answer3'] + '\n' + questions[questionNumber]['answer4'] + '\n' + '-1 - Забрать деньги');
+		        if (userAnswer == -1) {
+		            break;
+		        } else {
+		            isOkAnswer = isAnswer(4, userAnswer);
+		        }
+		    } while (!isOkAnswer);
+		}
+
+
+		function isAnswer(q, myEvent) {
+		    if (Number.isNaN(myEvent) || !Number.isFinite(myEvent)) {
+		        alert('Вы ввели недопустимый символ');
+		        return false;
+		    }
+		    else if (myEvent < 1 || myEvent > q) {
+		        alert('Ваше число выходит из допустимого диапозона');
+		        return false;
+		    }
+			return true;
+		}
+
+	</script>
+
+</body>
+</html>

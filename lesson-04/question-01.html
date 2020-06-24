@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<script>
+		
+		let userNumber = +prompt("Введите число от 0 до 999", 0); //запрашиваем у пользователя число
+		
+		console.log(checkNumber(userNumber)); //вызываем функцию проверки числа
+
+
+        function checkNumber(number) {
+        	let digitsObject = {}; // создаем пустой объект, чтобы можно было вывести его в случае >999
+        	if (Number.isNaN(number)) { //если пользователь ввел не число
+				do {
+					number = +prompt("Вы ввели не число \nВведите число от 0 до 999", 0); // в цикле повторно запрашиваем ввести число
+				} while (Number.isNaN(number)); // пока Number.isNaN(number) не станет false, т.е. введеное число будет преобразовываться в Number без ошибок
+			}
+			if ((number < 0) || (number > 999)) { // если введеное число выходит за пределы диапазона сообщаем об этом в консоли и возвращаем пустой объект
+	            console.log("out of range");
+	            return digitsObject;
+        	} else {
+        		return parseNumberToObject(number, digitsObject); // если число - число из нужного диапазона, возвращаем функцию, которая раскладывает число на разряды и записывает их в соответствующие поля объекта 
+        	}
+        }
+    
+		function parseNumberToObject(number, digitsNumber) {
+			for (let i = 1; i <= number.toString().length ; i++) { // заполняем объект нулевыми значениями в зависимости от длины введенного числа
+				switch(i) {
+					case 1:
+						digitsNumber.units = 0;
+						break;
+					case 2:
+						digitsNumber.tens = 0;
+						break;
+					case 3:
+						digitsNumber.hundreds = 0;
+						break;
+					case 4:
+						digitsNumber.thousands = 0;
+						break;
+					case 5:
+						digitsNumber.tensThousands = 0;
+						break;
+					case 6:
+						digitsNumber.hundredsThousands = 0;
+						break;
+					case 7:
+						digitsNumber.millions = 0;
+						break;
+					default:
+						console.log("Error");
+				}
+			}
+            for (let i in digitsNumber) { // так как объект не пустой, побращаемся к его полям в цикле
+            	digitsNumber[i] = number % 10; // остаток от деления на 10 == первый разряд числа записываем в i-ое поле объекта
+            	number = Math.floor(number / 10); // "отбрасываем" у числа первый разряд
+            }
+            return digitsNumber;
+		}
+
+	</script>
+	
+</body>
+</html>
