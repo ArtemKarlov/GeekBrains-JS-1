@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="question-02.css">
+</head>
+<body>
+
+	<div id="basket">
+		<h2>Корзина</h2>
+		<div class="basket-wrap"></div>
+		<p id="basket-cost"></p>
+	</div>
+	<div id="catalog">
+		<h2>Товары</h2>
+		<div class="catalog-wrap"></div>
+	</div>
+
+	<script>
+		// создаем массив товаров (каждый товар - это обект)
+		let basketCost = 0,
+			goods = [
+				item1 = {
+					name: "Sigma AF 35mm f/1.4 DG HSM ART Canon EF",
+					price: 56990,
+					imgSrc: "question-02-img/good-1.jpg",
+				},
+				item2 = {
+					name: "Sigma AF 18-35mm f/1.8 DC HSM Art Canon EF-S",
+					price: 52140,
+					imgSrc: "question-02-img/good-2.jpg",
+				},
+				item3 = {
+					name: "Sigma AF 50mm f/1.4 DG HSM Art Canon EF",
+					price: 52490,
+					imgSrc: "question-02-img/good-3.jpg",
+				},
+				item4 = {
+					name: "Sigma AF 30mm f/1.4 DC HSM Art Canon EF-S",
+					price: 29990,
+					imgSrc: "question-02-img/good-4.jpg",
+				},
+				item5 = {
+					name: "Sigma AF 120-300mm f/2.8 DG OS HSM Sports Canon EF",
+					price: 235900,
+					imgSrc: "question-02-img/good-5.jpg",
+				},
+			];
+		// добавляем обработчик событий на загрузку страницы
+		window.onload = function() {
+			// выбираем в DOM элемент по имени класса, в который будем вкладывать карточки товаров
+			let catalog = document.getElementsByClassName('catalog-wrap')[0];
+			// для всех товаров из массива товаров "goods" создаем объекты в DOM: блок, имя товара, картинка товара, цена товара, кнопка купить; заполняем их из массива и добавляем на страницу в раздел "Каталог"				
+			for (let i = 0; i < goods.length; i++) {
+				let catalogItem = document.createElement('div'),
+					itemName = document.createElement('p'),
+					itemImg = document.createElement('img'),
+					itemPrice = document.createElement('p'),
+					itemBuy = document.createElement('button');
+				// для созданных элементов задаем классы для оформления в css
+				catalogItem.className = 'item';
+				itemName.className = 'item__name';
+				itemImg.className = 'item__img';
+				itemPrice.className = 'item__price';
+				itemBuy.className = 'item__buy';
+
+				itemBuy.id = 'buy_' + i; // добавляем id для кнопки с текущим индексом массива товаров, чтобы испрозовать индекс в функции обработчика нажатия на кнопку
+
+				// заполняем созданные элементы содержимым из соответствующих объектов-товаров из массива товаров "goods"
+				itemName.innerText = goods[i]['name'];
+				itemImg.src = goods[i]['imgSrc'];
+				itemPrice.innerText = goods[i]['price'] + ' руб.';
+				itemBuy.innerText = "Buy";
+				//добавляем обработчик событий по нажатию на кнопку "Buy"
+				itemBuy.onclick = addToBasket;
+				// добавляем в созданную карточку товара все элементы по очереди
+				catalogItem.appendChild(itemName);
+				catalogItem.appendChild(itemImg);
+				catalogItem.appendChild(itemPrice);
+				catalogItem.appendChild(itemBuy);
+				// добавляем заполненную карточку товара в общий католог
+				catalog.appendChild(catalogItem);
+			}
+		}
+
+		function addToBasket() {
+			let inBasket = document.getElementsByClassName('basket-wrap')[0];
+			let index = this.id.split("_")[1]; //выделяем индекс из id текущего элемента-кнопки
+			let basketItem = document.createElement('p'), //создаем параграф в корзине и добавляем в него наименование и цену товара каждый раз при нажатии на кнопку "Buy"
+				basketPrice = document.createElement('span');
+				basketItem.innerHTML = goods[index]['name'];
+				basketPrice.innerText = ': ' + goods[index]['price'] + ' руб.';
+				basketItem.appendChild(basketPrice);
+				inBasket.appendChild(basketItem);
+
+
+			basketCost += goods[index]['price']; // прибавляем стоимость добавленного товара к общей сумме
+			document.getElementById('basket-cost').innerText = 'Итого: ' + basketCost + ' руб.'; // выводим новую общую сумму 
+		}
+
+	</script>
+
+</body>
+</html>

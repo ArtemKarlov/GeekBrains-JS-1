@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="slider"></div>
+	<div class="control">
+		<button id="prev" onclick="previous()">назад</button>
+		<button id="next" onclick="next()">вперед</button>
+	</div>
+	
+
+	<script>
+		let imageNumber = 1, //начальное значения номера изображения
+			imageQuantity = 3; //общее число изображений в слайдере == номеру последнего изображения
+		window.onload = showImage(1); //при загрузке страницы вызываем функцию для отображения первой картинки
+
+		function showImage(imageNum) { //функция отображает картинку в блоке "slider"
+			let imageSlide = document.createElement('img'); //создаем элемент "img"
+			imageSlide.src = "question-01-img/full/slider-" + imageNum + ".jpg"; // добавляем свойство src
+			imageSlide.width = "800";
+			imageSlide.height = "427";
+
+			imageSlide.onerror = function(){ // при загрузке с ошибкой в консоль будет выведено сообщение
+				console.log("don't loaded: " + imageSlide.src);
+			}
+			document.getElementById('slider').innerHTML = ''; // очищаем слайдер от предыдущей картинки
+			document.getElementById('slider').appendChild(imageSlide); // вставляем в слайдер новую картинку
+		}
+
+		function previous() {
+			if (imageNumber == 1) { //если находимся на первой картинке и хотим показать предыдущую, то номеру изображения присваиваем номер последнего изображения - такми образом будет показан последний элемент карусели
+				imageNumber = imageQuantity;
+			} else {imageNumber--;} // если мы не находимся на первом элементе, то просто переходим к предыдущему элементу
+			showImage(imageNumber); // вызываем функцию отображения картинки с нужным номером
+		}
+
+		function next() {
+			if (imageNumber == imageQuantity) {
+				imageNumber = 1;
+			} else {imageNumber++;}
+			showImage(imageNumber);
+		}
+		
+	</script>
+	
+</body>
+</html>

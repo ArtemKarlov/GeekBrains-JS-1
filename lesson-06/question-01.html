@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="full">
+		
+	</div>
+	<div class="preview" id="preview">
+		<img src="question-01-img/preview/slider-1_preview.jpg" alt="img-1" class="preview__img" id="ppreview__img-1">
+		<img src="question-01-img/preview/slider-2_preview.jpg" alt="img-2" class="preview__img" id="preview__img-2">
+		<img src="question-01-img/preview/slider-3_preview.jpg" alt="img-3" class="preview__img" id="preview__img-3">	
+	</div>
+	
+
+	<script>
+
+		window.onload = function() {
+			let previewImages = document.querySelectorAll("#preview img");
+			for (let i = 0; i < previewImages.length; i++) {
+				previewImages[i].onclick = function() {
+					let fullImg = document.createElement('img');
+					fullImg.src = "question-01-img/full/slider-" + (i+1) + ".jpg";
+					fullImg.width = "800";
+					fullImg.height = "427";
+					// fullImg.onload = function(){
+					// 	console.log('loaded: ' + fullImg.src);
+					// }
+					fullImg.onerror = function(){
+						console.log("don't loaded: " + fullImg.src);
+					}
+					document.getElementById('full').innerHTML = '';
+					document.getElementById('full').appendChild(fullImg);
+				}
+			}
+		}
+		
+	</script>
+	
+</body>
+</html>
