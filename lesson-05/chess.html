@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<style>
+		table {
+  text-align: center;
+}
+
+.up-down {
+  transform: rotate(180deg);
+}
+
+.figure {
+  display: block;
+  border-radius: 50%;
+}
+
+.white {
+  color: white;
+}
+
+.black {
+  color: black;
+}
+	</style>
+
+</head>
+<body>
+
+	<script>
+		
+		//объект с фигурами
+let chessmen = {
+ pawn:"п",
+ rook:"с",
+ knight:"г",
+ bishop:"о",
+ queen:"Ф",
+ king:"К",
+};
+
+//создаем поле
+let body = document.body;
+let table = document.createElement("table");
+table.cellSpacing ="0px";
+
+for(let i=0; i<10; i++){
+ let row = table.insertRow();
+  for (j=0; j<10; j++){
+   let cell = row.insertCell();
+   cell.style.width ="30px";
+   cell.style.height= "30px";
+
+ //раскрашиваем поле 
+   if(i==0 || i==9 || j==0 || j==9){
+     cell.style.backgroundColor = "white";
+   } else if ((i%2==0 && j%2!=0) || (i%2!=0 && j%2==0)){
+     cell.style.backgroundColor = "black";
+   } else {
+     cell.style.backgroundColor = "white";
+   }
+
+//расставляем надписи
+   if(i==0 || i==9){
+     switch (j){
+       case 1:
+         cell.innerHTML = "A";
+         break;
+       case 2:
+         cell.innerHTML = "B";
+         break;
+       case 3:
+         cell.innerHTML = "C";
+         break;
+       case 4:
+         cell.innerHTML = "D";
+         break;
+       case 5:
+         cell.innerHTML = "E";
+         break;
+       case 6:
+         cell.innerHTML = "F";
+         break;
+       case 7:
+         cell.innerHTML = "G";
+         break;
+       case 8:
+         cell.innerHTML = "H";
+         break;
+     }
+   }
+
+   if(j==0 || j==9){
+     switch (i){
+       case 1:
+         cell.innerHTML = "8";
+         break;
+       case 2:
+         cell.innerHTML = "7";
+         break;
+       case 3:
+         cell.innerHTML = "6";
+         break;
+       case 4:
+         cell.innerHTML = "5";
+         break;
+       case 5:
+         cell.innerHTML = "4";
+         break;
+       case 6:
+         cell.innerHTML = "3";
+         break;
+       case 7:
+         cell.innerHTML = "2";
+         break;
+       case 8:
+         cell.innerHTML = "1";
+         break;
+     }
+   }
+
+  if(i==0 || j==9){
+    cell.className = "up-down";
+  }
+
+  let span = document.createElement("span");
+   span.style.backgroundColor= "grey";
+
+  if(i<=4){
+    span.className= "figure white up-down";
+  } else {
+    span.className = "figure black";
+  }
+
+//расставляем фигуры
+   if((i==2 || i==7) && (j>0 && j<9)){
+     span.innerHTML = chessmen.pawn;
+     cell.appendChild(span);
+   }
+
+   if (i==1 || i==8) {
+     switch (j){
+       case 1:
+       case 8:
+         span.innerHTML = chessmen.rook;
+         break;
+       case 2:
+       case 7:
+         span.innerHTML = chessmen.knight;
+         break;
+       case 3:
+       case 6:
+         span.innerHTML = chessmen.bishop;
+         break;
+       case 4:
+         span.innerHTML = chessmen.queen;
+         break;
+       case 5:
+         span.innerHTML = chessmen.king;
+         break;
+       }
+       cell.appendChild(span);
+     }
+
+  }
+}
+
+
+body.appendChild (table);
+
+	</script>
+	
+</body>
+</html>
